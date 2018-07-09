@@ -633,95 +633,311 @@
     <script type="text/javascript" src="js/jsonlint.js"></script>
     <noscript><div><img src="https://mc.yandex.ru/watch/46845507" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    
+    
 
-
-        <!-- Splash screen -->
-        <section id="page-splash">
-          <h3 class="logo">Database Web Quickstart</h3>
-          <div>
-            <button id="sign-in-button" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">account_circle</i> Sign in with Google</button>
+    <div>
+        <div class="header"></div>
+      
+        <main></main>
+      
+        <div class="dialogs"></div>
+      
+        <div hidden class="template" id="header-base">
+            <header id="site-header" class="mdc-toolbar mdc-toolbar--fixed">
+              <div id="title" class="mdc-toolbar__row mdc-layout-grid">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                  <span class="material-icons mdc-toolbar__icon--menu">restaurant</span>
+                  <span class="mdc-toolbar__title">FriendlyEats</span>
+                </section>
+              </div>
+              <div id="section-header" data-fir-if="hasSectionHeader"></div>
+            </header>
+        </div>
+      
+        <div hidden class="template" id="main-adjusted">
+          <div id="message-cards-container" class="mdc-layout-grid mdc-toolbar-fixed-adjust">
+            <div id="cards" class="mdc-layout-grid__inner"></div>
           </div>
-        </section>
+        </div>
       
-        <!-- Header section containing logo and menu -->
-        <header class="header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-      
-          <div class="mdl-layout__header-row titlebar">
-            <h3 class="logo">Database Web Quickstart</h3>
-            <button id="sign-out-button" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">account_circle</i> Sign out</button>
+        <div hidden class="template" id="main">
+          <div id="message-cards-container" class="mdc-layout-grid">
+            <div id="cards" class="mdc-layout-grid__inner"></div>
           </div>
+        </div>
       
-          <!-- Navigation Bar -->
-          <div class="tab mdl-layout__header-row mdl-color--light-blue-600">
-            <div class="mdl-tab">
-              <div id="menu-recent" class="mdl-layout__tab is-active mdl-button mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">new_releases</i> Recent
+        <div hidden class="template" id="no-restaurants">
+          <div id="guy-container" class="mdc-toolbar-fixed-adjust">
+            <img class="guy" src="/images/guy_fireats.png" />
+            <div class="text">
+              This app is connected to the Firebase project "<b data-fir-content="projectId"></b>".<br />
+              <br />
+              Your Cloud Firestore has no documents in <b>/restaurants/</b>.
+            </div>
+            <br />
+            <a class="mdc-button" id="add_mock_data">
+              Add mock data
+            </a>
+          </div>
+        </div>
+      
+        <div hidden class="template" id="no-ratings">
+            <div id="guy-container" class="mdc-toolbar-fixed-adjust">
+              <img class="guy" src="/images/guy_fireats.png" />
+              <div class="text">
+                This restaurant has no ratings.<br />
               </div>
-              <div id="menu-my-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">home</i> My posts
-              </div>
-              <div id="menu-my-top-posts" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">trending_up</i> My top posts
-              </div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-color--amber-400 mdl-shadow--4dp mdl-js-ripple-effect" id="add">
-                <i class="material-icons">mode_edit</i>
-              </button>
+              <br />
+              <a class="mdc-button" data-fir-click="add_mock_data">
+                Add mock ratings
+              </a>
             </div>
           </div>
-        </header>
       
-        <main class="mdl-layout__content mdl-color--grey-100">
+        <div hidden class="template" id="no-results">
+          <div id="guy-container" class="mdc-toolbar-fixed-adjust">
+            <img class="guy" src="/images/guy_fireats.png" />
+            <div class="text">
+              There are no results for your those filters!
+            </div>
+          </div>
+        </div>
       
-          <!-- Show the add post form -->
-          <section class="mdl-grid content" id="add-post" style="display:none">
-            <div class="mdl-cell mdl-cell--12-col mdl-grid">
+        <div hidden class="template" id="filter-display">
+          <div id="filter" class="mdc-toolbar mdc-layout-grid">
+            <div id="show-filters" >
+              <div id="active-filters">
+                <i class="material-icons">filter_list</i>
+                You're seeing <b data-fir-content="filter_description"></b>
+              </div>
+            </div>
+          </div>
+        </div>
       
-                <!-- Card containing the inputs to add a new messages -->
-                <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet
-                        mdl-cell--6-col-desktop">
-                  <div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">
-                    <h2 class="mdl-card__title-text">New Post</h2>
-                  </div>
-                  <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                    <form id="message-form" action="#">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="new-post-title">
-                        <label class="mdl-textfield__label" for="new-post-title">Post title...</label>
+        <div hidden class="template" id="restaurant-header">
+          <header class="mdc-layout__header mdc-layout__header--transparent" data-fir-style="backgroundImage:photo">
+      
+            <div class="mdc-layout-grid" style="width: 100%;">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        <a href="/" data-navigo class="material-icons" id="close">close</a>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 info">
+                      <div class="max_width_600">
+                        <h2 data-fir-content="name"></h2>
+                        <span class="price"></span>
+                        <div class="rating"></div>
+                        <div class="details">
+                          <span class="rating"></span>
+                          <span data-fir-content="category"></span>
+                          <span class="light">●</span>
+                          <span data-fir-content="city"></span>
+                        </div>
+                        <button id="show-add-review" data-fir-click="show_add_review" class="mdc-button fab">
+                            <i class="material-icons">add</i>
+                          </button>
                       </div>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <textarea class="mdl-textfield__input" rows="3" id="new-post-message"></textarea>
-                        <label class="mdl-textfield__label" for="new-post-message">Post message...</label>
-                      </div>
-                      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                        Add post
-                      </button>
-                    </form>
-                  </div>
+                    </div>
+                </div>
               </div>
-            </div>
-          </section>
+          </header>
+        </div>
       
-          <!-- Show a list of recent posts -->
-          <section class="mdl-grid content" id="recent-posts-list" style="display:none">
-            <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-            </div>
-          </section>
+        <div hidden class="template" id="rating"></div>
+        <span hidden class="template" id="price"></span>
       
-          <!-- Show the list of user's posts -->
-          <section class="mdl-grid content" id="user-posts-list" style="display:none">
-            <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
-            </div>
-          </section>
+        <div hidden class="template mdc-layout-grid__cell--span-12" id="review-card">
+          <div class="review max_width_600">
+              <div class="header">
+                <div class="author">
+                  <span class="light" data-fir-content="userName"></span>
+                </div>
+                <div class="rating"></div>
+              </div>
+              <div data-fir-content="text"></div>
+          </div>
+        </div>
       
-          <!-- Show the list of top user's posts -->
-          <section class="mdl-grid content" id="top-user-posts-list" style="display:none">
-            <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
+        <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-4" id="restaurant-card">
+          <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_restaurant">
+            <div class="mdc-card__title" data-fir-style="backgroundImage:photo"></div>
+            <div class="mdc-card__supporting-text">
+              <h2 data-fir-content="name">...</h2>
+              <span class="info price"></span>
+              <div class="details">
+                <div class="rating"></div>
+              </div>
+              <div class="details">
+                <span class="info" data-fir-content="category"></span>
+                <span class="light">●</span>
+                <span class="info" data-fir-content="city"></span>
+              </div>
+      
             </div>
-          </section>
-        </main>
+          </div>
+        </div>
+      
+        <i hidden class="template material-icons" id="star-border-icon">star_border</i>
+        <i hidden class="template material-icons" id="star-icon">star</i>
+      
+        <ul hidden class="template mdc-list" id="item-list">
+            <li class="mdc-list-item" data-mdc-auto-init="MDCRipple" data-fir-foreach="items" data-fir-content="~"></li>
+        </ul>
+      
+        <ul hidden class="template mdc-list" id="all-filters-list">
+          <li id="show-page-category" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+            <i class="material-icons">fastfood</i>
+            <span data-fir-if-not="category">Any Category</span>
+            <b data-fir-content="category"></b>
+          </li>
+          <li id="show-page-city" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+            <i class="material-icons">location_on</i>
+            <span data-fir-if-not="city">Any Location</span>
+            <b data-fir-content="city"></b>
+          </li>
+          <li id="show-page-price" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+            <i class="material-icons">monetization_on</i>
+            <span data-fir-if-not="price">Any Price</span>
+            <b data-fir-content="price"></b>
+          </li>
+          <li id="show-page-sort" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+            <i class="material-icons">sort</i>
+            <b data-fir-content="sort"></b>
+          </li>
+        </ul>
+      
+        <aside id="dialog-filter-all" class="mdc-dialog">
+          <div class="mdc-dialog__surface">
+            <div class="page" id="page-all">
+              <header class="mdc-dialog__header">
+                <i class="material-icons">filter_list</i>
+                <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+                  Filter
+                </h2>
+              </header>
+              <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+                <div id="all-filters-list"></div>
+              </section>
+              <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Accept</button>
+              </footer>
+            </div>
+            <div class="page" id="page-category">
+              <header class="mdc-dialog__header">
+                <i class="material-icons">fastfood</i>
+                <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+                  Category
+                </h2>
+              </header>
+              <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+                <div id="category-list"></div>
+              </section>
+              <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button back">Back</button>
+              </footer>
+            </div>
+            <div class="page" id="page-city">
+              <header class="mdc-dialog__header">
+                <i class="material-icons">location_on</i>
+                <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+                  Location
+                </h2>
+              </header>
+              <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+                <div id="city-list"></div>
+              </section>
+              <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button back">Back</button>
+              </footer>
+            </div>
+            <div class="page" id="page-price">
+                <header class="mdc-dialog__header">
+                  <i class="material-icons">monetization_on</i>
+                  <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+                    Price
+                  </h2>
+                </header>
+                <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+                  <ul class="mdc-list">
+                    <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                      Any
+                    </li>
+                    <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                      $
+                    </li>
+                    <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                      $$
+                    </li>
+                    <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                      $$$
+                    </li>
+                    <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                      $$$$
+                    </li>
+                  </ul>
+                </section>
+              <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button back">Back</button>
+              </footer>
+            </div>
+            <div class="page" id="page-sort">
+              <header class="mdc-dialog__header">
+                <i class="material-icons">sort</i>
+                <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+                  Sort By
+                </h2>
+              </header>
+              <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+                <ul class="mdc-list">
+                  <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                    Rating
+                  </li>
+                  <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                    Reviews
+                  </li>
+                </ul>
+              </section>
+              <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button back">Back</button>
+              </footer>
+            </div>
+          </div>
+          <div class="mdc-dialog__backdrop"></div>
+        </aside>
+      
+        <aside id="dialog-add-review"
+          class="mdc-dialog">
+          <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+              <h2 id="my-mdc-dialog-label" class="mdc-dialog__header__title">
+                Add a Review
+              </h2>
+            </header>
+            <section class="mdc-dialog__body">
+                <div class="star-input">
+                  <i class="material-icons">star_border</i>
+                  <i class="material-icons">star_border</i>
+                  <i class="material-icons">star_border</i>
+                  <i class="material-icons">star_border</i>
+                  <i class="material-icons">star_border</i>
+                </div>
+                <textarea id="text"></textarea>
+            </section>
+            <footer class="mdc-dialog__footer">
+              <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+              <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+            </footer>
+          </div>
+          <div class="mdc-dialog__backdrop"></div>
+        </aside>
       </div>
-    <script src="scripts/main.js"></script>
+    
+      
+<script src="/scripts/FriendlyEats.js"></script>
+<script src="/scripts/FriendlyEats.View.js"></script>
+<script src="/scripts/FriendlyEats.Mock.js"></script>
+<script src="/scripts/FriendlyEats.Data.js"></script>
 </body>
 
 </html>
