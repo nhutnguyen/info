@@ -1,28 +1,44 @@
-Firebase SDK for Cloud Storage Quickstart
-=========================================
+# Firebase Quickstarts for Javascript
 
-The Firebase SDK for Cloud Storage  quickstart demonstrates how to connect to Cloud Storage, store data, and retrieve a download URL from a web client.
+A collection of quickstart samples demonstrating the Firebase APIs using the Javascript SDK. For more information, see https://firebase.google.com.
 
-Introduction
-------------
+Samples available:
+ - [Auth](auth/README.md)
+   - Anonymous Auth
+   - Custom Auth
+   - Email and Password auth
+   - Email Link auth
+   - Phone Auth using a visible ReCaptcha
+   - Phone Auth using an invisible ReCaptcha
+   - Phone Auth using popup
+   - [Google Auth in a Chrome Extension](auth/chromextension/README.md)
+   - Facebook auth using Facebook login button
+   - Facebook auth using Firebase popup
+   - Facebook auth using Firebase redirect
+   - Google auth using Google sign-in button
+   - Google auth using Firebase popup
+   - Google auth using Firebase redirect
+   - Twitter auth using Firebase popup
+   - Twitter auth using Firebase redirect
+   - GitHub auth using Firebase popup
+   - GitHub auth using Firebase redirect
+ - [Database](database/README.md)
+   - Simple Social Blogging app
+ - [Firestore](firestore/README.md)
+   - Simple Rating App
+ - [Functions](functions/README.md)
+   - Send requests to a Functions server-side instance and get back results.
+ - [Storage](storage/README.md)
+   - Upload a file to Firebase Storage and display its URL
+ - [Messaging](messaging/README.md)
+   - Send notifications
 
-[Read more about Firebase SDK for Cloud Storage ](https://firebase.google.com/docs/storage/)
+## How to make contributions?
+Please read and follow the steps in the [CONTRIBUTING.md](CONTRIBUTING.md)
 
-Getting Started
----------------
+## License
+See [LICENSE](LICENSE)
 
- 1. Create your project on the [Firebase Console](https://console.firebase.google.com).
- 1. Enable the **Anonymous** sign-in provider in the **Authentication > SIGN-IN METHOD** tab.
- 1. You must have the Firebase CLI installed. If you don't have it install it with `npm install -g firebase-tools` and then configure it with `firebase login`.
- 1. On the command line run `firebase use --add` and select the Firebase project you have created.
- 1. On the command line run `firebase serve` using the Firebase CLI tool to launch a local server.
+## Build Status
 
-Support
--------
-
-- [Firebase Support](https://firebase.google.com/support/)
-
-License
--------
-
-© Google, 2016. Licensed under an [Apache-2](../LICENSE) license.
+[![Build Status](https://travis-ci.org/firebase/quickstart-js.svg?branch=master)](https://travis-ci.org/firebase/quickstart-js)
